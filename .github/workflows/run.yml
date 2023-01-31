@@ -1,0 +1,33 @@
+
+name: reserve
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *' # 1am EST every day (-5 offset from UTC)
+jobs:
+  reserve:
+    env: 
+      ARTSVISION_USERNAME: ${{ secrets.ARTSVISION_USERNAME }}
+      ARTSVISION_PASSWORD: ${{ secrets.ARTSVISION_PASSWORD }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo environment variable
+        run: echo "The username is $ARTSVISION_USERNAME"
+      - name: Check out this repo
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Installed package list
+        run: apt list --installed
+      - name: Remove Chrome
+        run: sudo apt purge google-chrome-stable
+      - name: Remove default Chromium
+        run: sudo apt purge chromium-browser
+      - name: Install a new Chromium
+        run: sudo apt install -y chromium-browser
+      - name: Install all necessary packages
+        run: pip install -r requirements.txt 
+      - name: Run the scraping script
+        run: python action_routine.py
