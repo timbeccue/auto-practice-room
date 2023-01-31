@@ -4,6 +4,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 import time
 import os
+import random
 
 USERNAME = os.getenv('ARTSVISION_USERNAME')
 PASS = os.getenv('ARTSVISION_PASSWORD')
@@ -47,9 +48,12 @@ def reserve_room(driver):
     room_260 = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, "//span[text()='AH260 (LoLa)']"))
     room_262 = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, "//span[text()='AH262 (LoLa)']"))
 
+    rooms = [room_255, room_258, room_260, room_262]
+
     #driver.save_screenshot(f"./Screenshots/{int(time.time())}-screenshot.PNG")
 
-    room_255.click()
+    chosen_room = random.choice(rooms)
+    chosen_room.click()
 
     try:
         location = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.CSS_SELECTOR, "div.av-rr-field:nth-child(1) div.av-rr-field-val a span")).text
