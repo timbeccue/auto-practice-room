@@ -2,8 +2,8 @@
 name: reserve
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 6 * * *' # 1am EST every day (-5 offset from UTC)
+  #schedule:
+  #  - cron: '0 6 * * *' # 1am EST every day (-5 offset from UTC)
 jobs:
   reserve:
     env: 
