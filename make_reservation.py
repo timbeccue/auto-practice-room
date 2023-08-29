@@ -43,12 +43,13 @@ def reserve_room(driver):
 
     time.sleep(5)
 
-    room_255 = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, "//span[text()='AH255 (LoLa)']"))
-    room_258 = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, "//span[text()='AH258 (LoLa)']"))
-    room_260 = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, "//span[text()='AH260 (LoLa)']"))
-    room_262 = WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, "//span[text()='AH262 (LoLa)']"))
-
-    rooms = [room_255, room_258, room_260, room_262]
+    rooms = [
+        WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, "//span[text()='AH255 (LoLa)']")),
+        WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, "//span[text()='AH258 (LoLa)']")),
+        WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, "//span[text()='AH260 (LoLa)']")),
+        WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, "//span[text()='AH262 (LoLa)']")),
+        WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(By.XPATH, "//span[text()='AH257 (LoLa)']"))
+    ]
 
     #driver.save_screenshot(f"./Screenshots/{int(time.time())}-screenshot.PNG")
 
